@@ -5,6 +5,8 @@ import hashlib
 import hmac
 import base64
 import urllib.parse as urlparse
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 
 def sign_url(input_url=None, secret=None):
     # Sign a request URL with a URL signing secret.
@@ -35,11 +37,25 @@ load_dotenv()
 api_key = os.getenv("API_KEY")
 sign_key = os.getenv("SIGN_KEY")
 url = os.getenv("URL")
-api_secret = sign_url(url, sign_key)
-print(api_secret)
+# api_secret = sign_url(url, sign_key)
+# print(api_secret)
 
-request = requests.get(f"{url}size=600x400&location=32.86782,-117.231&fov=80&heading=70&pitch=0&key={api_key}{api_try}")
+#request = requests.get(f"{url}size=600x400&location=32.86782,-117.231&fov=80&heading=70&pitch=0&key={api_key}{api_secret}")
+#print(request)
+
+lat_coord = 32.87031
+long_coord = -117.215
+heading = 230
+fov = 30
+pitch = 0
+request = requests.get(f"{url}size=600x400&location={lat_coord},{long_coord}&fov={fov}&heading={heading}&pitch={pitch}&key={api_key}")
 print(request)
-with open("data/images/test1.jpg", "wb") as file:
-    file.write(request.content)
-request.close()
+if (request.ok == True):
+    pic_name = f"data/images/test{5}.jpg"
+    with open(pic_name, "wb") as file:
+        file.write(request.content)
+    request.close()
+    plt.figure()
+    img=mpimg.imread(pic_name)
+    imgplot = plt.imshow(img)
+    plt.show()
