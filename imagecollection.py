@@ -54,10 +54,22 @@ def image_generator(coords, heading, fov, pitch, structure_pic):
         imgplot = plt.imshow(img)
         plt.show()
 
-lat_coord = 32.8656763
-long_coord = -117.2371601
-heading = 348
-fov = 20
-pitch = 0
-structure_pic = "10_15"
-image_generator((lat_coord, long_coord), heading, fov, pitch, structure_pic)
+def image_params(params, structure_num):
+    img_count = 15
+    for i in range(img_count):
+        lat_coord = params[i][0]
+        long_coord = params[i][1]
+        heading = params[i][2]
+        fov = params[i][3]
+        pitch = params[i][4]
+        structure_pic = f"{structure_num}_{i+1}"
+        image_generator((lat_coord, long_coord), heading, fov, pitch, structure_pic)
+
+struc1 = [[32.8678091, -117.2316809, 104.74, 90, 0],[32.8678091, -117.2316809, 104.74, 50, 0],\
+          [32.8678091, -117.2316809, 104.74, 20, -2],[32.867829, -117.2315762, 120.09, 90, 0],\
+          [32.867829, -117.2315762, 120.09, 50, 0],[32.867829, -117.2315762, 120.09, 20, -8],\
+           [32.8678515, -117.2314751, 185.27, 90, 0],[32.8678515, -117.2314751, 185.27, 50, 0],\
+	    [32.8678515, -117.2314751, 185.27, 20, -9], [32.8678702, -117.2313684, 218.15, 90, 0],\
+	    [32.8678702, -117.2313684, 218.15, 50, 0],[32.8678702, -117.2313684, 221, 20, -3],\
+        [32.8678689, -117.2312877, 239.82, 90, 0],[32.8678689, -117.2312877, 239.82, 50, 0],\
+	    [32.8678689, -117.2312877, 239.82, 20, 0]]
