@@ -44,7 +44,6 @@ def image_generator(coords, heading, fov, pitch, structure_pic):
     url = f"{base_url}size=600x400&location={coords[0]},{coords[1]}&fov={fov}&heading={heading}&pitch={pitch}&key={api_key}"
     api_secret = sign_url(url, sign_key)
     request = requests.get(api_secret)
-    print(request)
     if (request.ok == True):
         pic_name = f"data/images/structure{structure_pic}.jpg"
         with open(pic_name, "wb") as file:
@@ -55,10 +54,10 @@ def image_generator(coords, heading, fov, pitch, structure_pic):
         imgplot = plt.imshow(img)
         plt.show()
 
-lat_coord = 32.8703877
-long_coord = -117.2162885
-heading = 173.33
-fov = 15
-pitch = -6
-structure_pic = "4_15"
+lat_coord = 32.8699886
+long_coord = -117.2152565
+heading = 355
+fov = 10
+pitch = 0
+structure_pic = "2_15"
 image_generator((lat_coord, long_coord), heading, fov, pitch, structure_pic)
