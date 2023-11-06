@@ -55,10 +55,10 @@ def image_generator(coords, heading, fov, pitch, structure_pic):
         imgplot = plt.imshow(img)
         plt.show()
 
-lat_coord = 32.869096
-long_coord = -117.2165479
-heading = 320
-fov = 20
-pitch = -3
-structure_pic = "3_7"
+lat_coord = 32.8703877
+long_coord = -117.2162885
+heading = 173.33
+fov = 15
+pitch = -6
+structure_pic = "4_15"
 image_generator((lat_coord, long_coord), heading, fov, pitch, structure_pic)
