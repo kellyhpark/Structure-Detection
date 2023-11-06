@@ -39,29 +39,26 @@ load_dotenv()
 api_key = os.getenv("API_KEY")
 sign_key = os.getenv("SIGN_KEY")
 base_url = os.getenv("URL")
-url = f"{base_url}size=600x400&location=32.86782,-117.231&fov=80&heading=70&pitch=0&key={api_key}"
-api_secret = sign_url(url, sign_key)
-request = requests.get(api_secret)
-print(request)
 
+def image_generator(coords, heading, fov, pitch, structure_pic):
+    url = f"{base_url}size=600x400&location={coords[0]},{coords[1]}&fov={fov}&heading={heading}&pitch={pitch}&key={api_key}"
+    api_secret = sign_url(url, sign_key)
+    request = requests.get(api_secret)
+    print(request)
+    if (request.ok == True):
+        pic_name = f"data/images/structure{structure_pic}.jpg"
+        with open(pic_name, "wb") as file:
+            file.write(request.content)
+        request.close()
+        plt.figure()
+        img=mpimg.imread(pic_name)
+        imgplot = plt.imshow(img)
+        plt.show()
 
-# request = requests.get(f"{url}size=600x400&location=32.86782,-117.231&fov=80&heading=70&pitch=0&key={api_key}{api_secret}")
-# print(request)
-# print(f"{url}size=600x400&location=32.86782,-117.231&fov=80&heading=70&pitch=0&key={api_key}{api_secret}")
-
-lat_coord = 32.85631
-long_coord = -117.207
-heading = 165
-fov = 70
-pitch = 0
-request = requests.get(f"{url}size=600x400&location={lat_coord},{long_coord}&fov={fov}&heading={heading}&pitch={pitch}&key={api_key}")
-print(request)
-if (request.ok == True):
-    pic_name = f"data/images/test{5}.jpg"
-    with open(pic_name, "wb") as file:
-        file.write(request.content)
-    request.close()
-    plt.figure()
-    img=mpimg.imread(pic_name)
-    imgplot = plt.imshow(img)
-    plt.show()
+lat_coord = 32.869096
+long_coord = -117.2165479
+heading = 320
+fov = 20
+pitch = -3
+structure_pic = "3_7"
+image_generator((lat_coord, long_coord), heading, fov, pitch, structure_pic)
